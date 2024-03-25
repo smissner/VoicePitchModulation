@@ -1,0 +1,119 @@
+<mxfile host="app.diagrams.net" modified="2024-03-25T18:50:49.158Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0" etag="j_yCCgTOTbmxtBHGWG5u" version="24.1.0" type="device">
+  <diagram name="Page-1" id="5zp2nEmHKWxAs9zhoT1L">
+    <mxGraphModel dx="913" dy="437" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" source="TIJ_z79Tz0l1ImIDRKO6-1" target="TIJ_z79Tz0l1ImIDRKO6-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-1" value="Process Input Data" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="140" y="60" width="100" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TIJ_z79Tz0l1ImIDRKO6-2" target="TIJ_z79Tz0l1ImIDRKO6-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-2" value="&lt;div&gt;F0 Detection&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="120" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-4" value="Voiced/Unvoiced Decision" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="290" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-6" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="TIJ_z79Tz0l1ImIDRKO6-1" target="TIJ_z79Tz0l1ImIDRKO6-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="310" y="260" as="sourcePoint" />
+            <mxPoint x="360" y="210" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="330" y="150" />
+              <mxPoint x="330" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-7" value="Pulse train generation" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="120" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-11" value="Vocal Tract Modelling" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="230" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-12" value="&lt;div&gt;Time-Varying&amp;nbsp;&lt;/div&gt;&lt;div&gt;Filter Operation&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="130" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-13" value="Blocked Audio Data" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="260" y="160" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-14" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="TIJ_z79Tz0l1ImIDRKO6-7" target="TIJ_z79Tz0l1ImIDRKO6-12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="520" y="350" as="sourcePoint" />
+            <mxPoint x="570" y="300" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="640" y="150" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-15" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="TIJ_z79Tz0l1ImIDRKO6-11" target="TIJ_z79Tz0l1ImIDRKO6-12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="490" y="220" as="sourcePoint" />
+            <mxPoint x="540" y="170" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="640" y="260" />
+              <mxPoint x="640" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-16" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="TIJ_z79Tz0l1ImIDRKO6-1" target="TIJ_z79Tz0l1ImIDRKO6-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="330" y="100" as="sourcePoint" />
+            <mxPoint x="380" y="50" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="550" y="90" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-17" value="Modulation Instructions" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="270" y="60" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-18" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="TIJ_z79Tz0l1ImIDRKO6-1" target="TIJ_z79Tz0l1ImIDRKO6-11">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="160" y="340" as="sourcePoint" />
+            <mxPoint x="210" y="290" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="330" y="150" />
+              <mxPoint x="330" y="260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-22" value="Process Output Data" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="140" width="100" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-23" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="TIJ_z79Tz0l1ImIDRKO6-4" target="TIJ_z79Tz0l1ImIDRKO6-22">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="830" y="340" as="sourcePoint" />
+            <mxPoint x="880" y="290" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="830" y="320" />
+              <mxPoint x="830" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-24" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="TIJ_z79Tz0l1ImIDRKO6-12" target="TIJ_z79Tz0l1ImIDRKO6-22">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="820" y="100" as="sourcePoint" />
+            <mxPoint x="870" y="50" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="820" y="170" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-25" value="&lt;div&gt;Resynthesized&lt;/div&gt;&lt;div&gt;Speech (Voiced)&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="800" y="130" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-26" value="V/UV Flag" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="830" y="230" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TIJ_z79Tz0l1ImIDRKO6-27" value="Time-Varying Vocal Tract Coefficients" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="480" y="230" width="110" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
