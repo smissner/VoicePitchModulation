@@ -39,3 +39,22 @@ catch ME
 end
 
 %% Run VocalTractSynthesis on a test example
+% Load test audio and prune to about 5 seconds
+[testAudio, fs] = audioread('vocadito/Audio/vocadito_1.wav');
+testAudio = testAudio(1:10*fs);
+
+% Run the VocalTractAnalysis function
+[a, g, err, n] = VocalTractAnalysis(testAudio, fs);
+
+% Run the VocalTractSynthesis function
+y = VocalTractSynthesis(err, a, g, n);
+
+% Difference between original and reconstructed audio
+figure(1);
+subplot(2, 1, 1);
+plot(testAudio);
+hold on;
+plot(y);
+subplot(2, 1, 2);
+plot(testAudio - y);
+
