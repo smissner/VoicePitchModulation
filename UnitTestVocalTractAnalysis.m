@@ -38,10 +38,21 @@ set(0, 'DefaultFigureWindowStyle', 'docked');
 % Figure 1: Original Audio and LPC Error Signal
 t = ((1:1:length(testAudio))-1)./fs;
 figure(1);
-subplot(2, 1, 1);
+subplot(3, 1, 1);
 plot(t, testAudio);
-subplot(2, 1, 2);
+title('Original Audio')
+subplot(3, 1, 2);
 plot(t, err);
+title('Residual Prediction Error')
+subplot(3, 1, 3);
+gExt = zeros(size(a,1)*n, 1);
+for m = 1:n
+    gExt(m:n:end) = g;
+end
+gExt = [gExt; zeros(length(err)-length(gExt), 1)];
+plot(t, 1./sqrt(gExt));
+title('Prediction Gain');
+xlabel('Time (s)')
 linkaxes(get(gcf, 'Children'), 'x');
 
 % Figure 2: Original Audio WB spectrogram and LPC spectrum
