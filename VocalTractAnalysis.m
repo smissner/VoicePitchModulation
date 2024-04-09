@@ -36,15 +36,18 @@ if(~isscalar(fs))
 end
 
 %% Constants
-ord = 20;                  % LPC Order
-windowOvlpTime = 0.0001;   % Hop size in seconds
-windowLenTime = 0.005;     % Window length in seconds
+ord = 15;                           % LPC Order
+windowLenTime = 0.02;               % Window length in seconds
+windowOvlpTime = 0.5*windowLenTime; % 50% Overlap
 
 hopSizeN = int32(floor((windowLenTime-windowOvlpTime)*fs)); % Hop size in number of samples
 windowLenN = int32(floor(windowLenTime*fs)); % Window length in number of samples
 
 %% Setup
-numFrames = floor(length(audio)/hopSizeN) - 1;
+% Truncate the input to fit into an even number of frames
+numFrames = 1 + floor( (length(audio)-windowLenN) / hopSizeN );
+
+%floor(length(audio)/hopSizeN) - 1;
 window = hamming(windowLenN, 'periodic');
 
 % Matrix of windowed autocorrelations
@@ -52,7 +55,6 @@ windowedAutocorrs = zeros(windowLenN, numFrames);
 
 % Error signal and time-varying filter state
 errorSig = zeros(size(audio));
-filtState = zeros(ord, 1);
 
 %% Main Processing Loop
 % Compute windowed autocorrelation on each audio frame
@@ -77,17 +79,19 @@ end
 % form of the levinson() function
 [aCoeffs, errorVec, kCoeffs] = levinson(windowedAutocorrs, ord);
 
-% Generate the error signal by applying the time varying aCoeffs to the
-% input audio
+% Apply each filter to the entire input timeseries and switch the outputs
+% to remove transients
+% https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=735314
+allErrOutputs = zeros(numFrames, length(errorSig));
 for m = 1:numFrames
-    % Get the start and stop index for this frame
+    % NOTE: This is WILDLY inefficient, but it works :)
+    allErrOutputs(m, :) = filter(aCoeffs(m,:), 1, audio);
+end
+
+for m = 1:numFrames
     startIdx = (m-1)*hopSizeN + 1;
-    stopIdx = (m-1)*hopSizeN + windowLenN;
-
-    localSig = audio(startIdx:stopIdx);
-    [localErr, filtState] = filter(aCoeffs(m,:), 1, localSig, filtState);
-
-    errorSig(startIdx:stopIdx) = localErr;
+    stopIdx = startIdx + hopSizeN - 1;
+    errorSig(startIdx:stopIdx) = (1.0/sqrt(errorVec(m)))*allErrOutputs(m,startIdx:stopIdx);
 end
 
 % Assign function outputs
