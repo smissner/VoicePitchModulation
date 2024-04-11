@@ -61,7 +61,7 @@ errorSig = zeros(size(audio));
 for m = 1:numFrames
     % Get the start and stop index for this frame
     startIdx = (m-1)*hopSizeN + 1;
-    stopIdx = (m-1)*hopSizeN + windowLenN;
+    stopIdx = min((m-1)*hopSizeN + windowLenN,length(audio));
 
     % Window this audio frame
     curAudioFrame = audio(startIdx:stopIdx);
