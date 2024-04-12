@@ -54,7 +54,7 @@ end
 
 for m = 1:numFrames
     startIdx = (m-1)*hopLen + 1;
-    stopIdx = startIdx + hopLen - 1;
+    stopIdx = min(startIdx + hopLen - 1,length(y));
     y(startIdx:stopIdx) = allSynthOutputs(m,startIdx:stopIdx);
 end
 

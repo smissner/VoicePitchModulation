@@ -1,5 +1,5 @@
 
-function [pitch_shifted_signal] = psola(sp)
+function [pitch_shifted_signal] = psola(sp,sc)
 
 % [sp , Fs] = audioread("parham.wav");
 % %sp=sp(2293:2293+441);
@@ -24,7 +24,6 @@ function [pitch_shifted_signal] = psola(sp)
  
 %%
 [M,B]=pitch_estimation_Long_term(sp);
-sc=2;
 M2=round(M*sc);
  
 win=hamming(1,2*M);
