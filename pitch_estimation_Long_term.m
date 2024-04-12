@@ -1,7 +1,8 @@
 function [pitch_period,gain] = pitch_estimation_Long_term(sp)
 n=length(sp);
 %Establish upper and lower pitch search limits
-pmin=30; pmax=200;
+
+pmin=50; pmax=200;
 sp2=sp.^2;% pre-calculate to save time
 for pitch_period=pmin:pmax
     e_del=sp(1:n-pitch_period);
