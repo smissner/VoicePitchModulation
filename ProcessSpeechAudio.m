@@ -8,7 +8,7 @@ function processedAudio = ProcessSpeechAudio(audio,fs,modulationTriplets)
         aBlock = audio(1+fs*t1:1+fs*t2);
        % dnBlock = denoisedAudio(1+fs*t1:1+fs*t2);
         [aCoeffs, predGains, errorSig, nInterval, kCoeffs] = VocalTractAnalysis(aBlock, fs);
-        excitation = PSOLA(ablock,fs,errorSig);
+        excitation = pitchmoving(aBlock,modulationTriplets(i,3));
         modBlock = VocalTractSynthesis(excitation, aCoeffs, predGains, nInterval);
         audio(1+fs*t1:1+fs*t2) = modBlock(1:length(aBlock));
     end
