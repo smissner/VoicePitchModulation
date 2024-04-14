@@ -58,6 +58,42 @@ subplot(2, 2, 4);
 plot(f0_out);
 
 %% Next, try it out on a raw audio segment
+clear;
+close all;
+[audio, fs] = audioread('vocadito/Audio/vocadito_2.wav');
+audioSegment = audio(789548:819938); % Isolating a specific vowel
 
+% Get the pitch estimate
+windowLen = floor(0.05*fs);
+hopSize = floor(0.5*windowLen);
+f0_est = pitch(audioSegment, fs, method="CEP", WindowLength=windowLen,OverlapLength=hopSize);
 
-%% Finally, try it out on an LPC residual signal
+% Run a median filter to clean up f0_est
+f0_est = medfilt1(f0_est);
+
+figure(1);
+subplot(2, 1, 1);
+plot(audioSegment);
+subplot(2, 1, 2);
+plot(f0_est);
+
+% Place pitch marks
+m = findPitchMarks(audioSegment, fs, f0_est, hopSize, windowLen);
+m_compare = zeros(length(audioSegment), 1);
+m_compare(m') = 1.0;
+
+figure(2);
+plot(audioSegment);
+hold on;
+plot(m_compare);
+hold off;
+
+% Run psola
+out = psola(audioSegment, m, 1.0, 1.25)';
+figure(3);
+subplot(2, 1, 1);
+plot(audioSegment);
+subplot(2, 1, 2);
+plot(out);
+
+%% Finally, try it out in the full system
