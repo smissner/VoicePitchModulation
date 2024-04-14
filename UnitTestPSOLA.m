@@ -97,3 +97,29 @@ subplot(2, 1, 2);
 plot(out);
 
 %% Finally, try it out in the full system
+% Using the same audio segment as before
+clear;
+close all;
+[audio, fs] = audioread('vocadito/Audio/vocadito_2.wav');
+audioSegment = audio(789548:819938);
+
+% Run short-time pitch estimation
+windowLen = floor(0.05*fs);
+hopSize = floor(0.5*windowLen);
+f0_est = pitch(audioSegment, fs, method="CEP", WindowLength=windowLen,OverlapLength=hopSize);
+
+figure(1);
+subplot(2, 1, 1);
+plot(audioSegment);
+subplot(2, 1, 2);
+plot(f0_est);
+
+% Whiten the original signal with LPC analysis
+[aCoeffs, predGains, residual, nInterval, ~] = VocalTractAnalysis(audioSegment, fs);
+
+% Get pitch marks and run PSOLA on the error residual
+m = findPitchMarks(residual, fs, f0_est, hopSize, windowLen);
+residualStretched = psola(residual, m, 1.0, 1.25)';
+
+% Re-synthesize with LPC synthesis
+audioOut = VocalTractSynthesis(residualStretched, aCoeffs, predGains, nInterval);
