@@ -19,22 +19,23 @@ function processedAudio = ProcessSpeechAudio(audio,fs,modulationTriplets)
 %   frequency across the modulation instruction, so the output across the
 %   time interval(t1 to t2) will become monotonic if it wasn't already.
     audio = audio/max(audio);
+    windowLen = floor(0.05*fs);
+    hopSize = floor(0.5*windowLen);
     for i = 1:length(modulationTriplets(:,1))
         t1 = modulationTriplets(i,1);
         t2=modulationTriplets(i,2);
         fmod = modulationTriplets(i,3);
         aBlock = audio(1+fs*t1:1+fs*t2);
-        [aCoeffs, predGains, errorSig, nInterval, kCoeffs] = VocalTractAnalysis(aBlock, fs);
-        excitation = zeros(length(aBlock),1);
-        if(fmod<10)
-            [period,g] = pitch_estimation_Long_term(aBlock);
-            period = period*fmod;
+        %[aCoeffs, predGains, residual, nInterval, ~] = VocalTractAnalysis(aBlock, fs);
+        f0_est = pitch(aBlock, fs, method="CEP", WindowLength=windowLen,OverlapLength=hopSize);
+        m = findPitchMarks(aBlock, fs, f0_est, hopSize, windowLen);
+        if(fmod>10)
+            blockStretched = psola(aBlock, m, 1.0, fmod,true);
         else
-            period = fmod;
+            blockStretched = psola(aBlock, m, 1.0, fmod,false);
         end
-        excitation(1:ceil(fs/period):end) = 1;
-        modBlock = VocalTractSynthesis(excitation(1:length(errorSig)), aCoeffs, predGains, nInterval);
-        audio(1+fs*t1:1+fs*t2) = modBlock(1:length(aBlock));
+       % modBlock = VocalTractSynthesis(residualStretched, aCoeffs, predGains, nInterval);
+        audio(1+fs*t1:1+fs*t2) = blockStretched(1:length(aBlock));
         
     end
     processedAudio = audio;

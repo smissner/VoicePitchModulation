@@ -45,7 +45,8 @@ windowLenN = int32(floor(windowLenTime*fs)); % Window length in number of sample
 
 %% Setup
 % Truncate the input to fit into an even number of frames
-numFrames = 1 + floor( (length(audio)-windowLenN) / hopSizeN );
+% numFrames = 1 + floor( (length(audio)-windowLenN) / hopSizeN );
+numFrames = floor( (length(audio)-windowLenN) / hopSizeN );
 
 %floor(length(audio)/hopSizeN) - 1;
 window = hamming(windowLenN, 'periodic');
