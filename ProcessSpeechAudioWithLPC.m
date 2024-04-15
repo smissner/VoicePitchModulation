@@ -1,5 +1,4 @@
-
-function processedAudio = ProcessSpeechAudio(audio,fs,modulationTriplets)
+function processedAudio = ProcessSpeechAudioWithLPC(audio,fs,modulationTriplets)
 % ProcessSpeechAudio - Takes in audio and modulation instructions and
 % reconstructs the speech pitch according to the instructions.
 
@@ -24,16 +23,16 @@ function processedAudio = ProcessSpeechAudio(audio,fs,modulationTriplets)
         if(isempty(aBlock))
             break;
         end
-        %[aCoeffs, predGains, residual, nInterval, ~] = VocalTractAnalysis(aBlock, fs);
+        [aCoeffs, predGains, residual, nInterval, ~] = VocalTractAnalysis(aBlock, fs);
         f0_est = pitch(aBlock, fs, method="CEP", WindowLength=windowLen,OverlapLength=hopSize);
-        m = findPitchMarks(aBlock, fs, f0_est, hopSize, windowLen);
+        m = findPitchMarks(residual, fs, f0_est, hopSize, windowLen);
         if(fmod>10)
-            blockStretched = psola(aBlock, m, 1.0, fmod,true);
+            blockStretched = psola(residual, m, 1.0, fmod,true);
         else
-            blockStretched = psola(aBlock, m, 1.0, fmod,false);
+            blockStretched = psola(residual, m, 1.0, fmod,false);
         end
-       % modBlock = VocalTractSynthesis(residualStretched, aCoeffs, predGains, nInterval);
-        audio(1+round(fs*t1):round(fs*t2)) = blockStretched(1:length(aBlock));
+        modBlock = VocalTractSynthesis(blockStretched, aCoeffs, predGains, nInterval);
+        audio(1+round(fs*t1):round(fs*t2)) = modBlock(1:length(aBlock));
         
     end
     processedAudio = audio;
