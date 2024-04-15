@@ -1,4 +1,4 @@
-function out=psola(in,m,alpha,beta)
+function out=psola(in,m,alpha,beta,statMod)
 % Authors: G. De Poli, U. Zölzer, P. Dutilleux
 %     in    input signal
 %     m     pitch marks
@@ -38,5 +38,9 @@ while round(tk)<Lout
   endGr=round(tk)+pit;
   if endGr>Lout, break; end
   out(iniGr:endGr) = out(iniGr:endGr)+gr'; %overlap new segment
-  tk=tk+pit/beta;
+  if(statMod)
+       tk = tk + beta;
+  else
+       tk = tk+pit/beta;
+  end
 end %while
