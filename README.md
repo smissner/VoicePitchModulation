@@ -1,0 +1,1 @@
+The main function to run here is ProcessSpeechAudio.m. This function will take in an audio signal, sample rate, and a matrix with each row as modulation instructions(t1,t2,fmod). More information can be found in the file.
